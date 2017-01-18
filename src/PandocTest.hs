@@ -7,6 +7,9 @@ import Text.Pandoc
 import Text.Pandoc.Writers.Markdown
 import Data.Default
 
+mdFile =
+  writeFile "/tmp/file.md" md
+
 md =
   writeMarkdown def pandoc
 
@@ -50,8 +53,8 @@ blocks =
   ,BlockQuote
    [Para [Str "a",Space,Str "quote",SoftBreak,Str "more",Space,Str "quote",SoftBreak,Str "more",Space,Str "more",Space,Str "quote"]]
   ,HorizontalRule
-  ,Para [Str "a",Space,Str "paragraph",Space,Str "with",Space,Code ("",[],[]) "inline code",Space,Str "and",Space,Str "some",Space,Strong [Str "bold",Space,Str "text"],Space,Str "and",Space,Str "some",Space,Emph [Str "italic",Space,Str "text"],Str ".",SoftBreak,Str "there",Space,Str "is",Space,Str "also",Space,Link ("",[],[]) [Str "a",Space,Str "link"] ("http://google.com",""),Space,Str "and",Space,Link ("",[],[]) [Str "another",Space,Str "link",Space,Str "with",Space,Str "title"] ("http://blog.tmorris.net/%20the%20blog",""),Str "."]
-  ,Para [Str "here",Space,Str "is",Space,Str "a",Space,Strikeout [Str "strikeout"],Str "."]
+  ,Para [Str "a",Space,Str "paragraph",Space,Str "with",Space,Code ("",[],[]) "inline code",Space,Str "and",Space,Str "some",Space,Strong [Str "bold",Space,Str "text"],Space,Str "and",Space,Str "some",Space,Emph [Str "italic",Space,Str "text"],Space,Str "and",Space,Str "some",Space,Strong [Emph [Str "bold",Space,Str "and",Space,Str "italic",Space,Str "text"]],Space,Str "and",Space,Str "some",Space,Strikeout [Strong [Emph [Str "strikeout",Space,Str "bold",Space,Str "and",Space,Str "italic",Space,Str "text"]]],Str ".",SoftBreak,Str "there",Space,Str "is",Space,Str "also",Space,Link ("",[],[]) [Str "a",Space,Str "link"] ("http://google.com",""),Space,Str "and",Space,Link ("",[],[]) [Str "another",Space,Str "link",Space,Str "with",Space,Str "title"] ("http://blog.tmorris.net/%20the%20blog",""),Str "."]
+  ,Para [Str "here",Space,Str "is",Space,Str "a",Space,Strikeout [Str "strikeout", Space, Str "out"],Str "."]
   ,Para [Str "H",Subscript [Str "2"],Str "O",Space,Str "is",Space,Str "a",Space,Str "liquid.",Space,Str "2",Superscript [Str "10"],Space,Str "is",Space,Str "1024."]
   ,HorizontalRule
   ,CodeBlock ("",[],[]) "a code block"
