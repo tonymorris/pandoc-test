@@ -118,3 +118,16 @@ blocks =
   ,HorizontalRule
   ,Para [Str "Here",Space,Str "is",Space,Str "a",Space,Str "footnote",Space,Str "reference,",Note [Para [Str "Here",Space,Str "is",Space,Str "the",Space,Str "footnote."]],Space,Str "and",Space,Str "another.",Note [Para [Str "Here's",Space,Str "one",Space,Str "with",Space,Str "multiple",Space,Str "blocks."],Para [Str "Subsequent",Space,Str "paragraphs",Space,Str "are",Space,Str "indented",Space,Str "to",Space,Str "show",Space,Str "that",Space,Str "they",SoftBreak,Str "belong",Space,Str "to",Space,Str "the",Space,Str "previous",Space,Str "footnote."],CodeBlock ("",[],[]) "{ some.code }",Para [Str "The",Space,Str "whole",Space,Str "paragraph",Space,Str "can",Space,Str "be",Space,Str "indented,",Space,Str "or",Space,Str "just",Space,Str "the",Space,Str "first",SoftBreak,Str "line.",Space,Str "In",Space,Str "this",Space,Str "way,",Space,Str "multi-paragraph",Space,Str "footnotes",Space,Str "work",Space,Str "like",SoftBreak,Str "multi-paragraph",Space,Str "list",Space,Str "items."]]]
   ,Para [Str "This",Space,Str "paragraph",Space,Str "won't",Space,Str "be",Space,Str "part",Space,Str "of",Space,Str "the",Space,Str "note,",Space,Str "because",Space,Str "it",SoftBreak,Str "isn't",Space,Str "indented."]]
+
+{-
+[Para [Str "What",Space,Str "is",Space,Str "the",Space,Str "colour",Space,Str "of",Space,Str "the",Space,Str "sky?"]
+    ,OrderedList (1,Decimal,Period)
+     [[Plain [Str "blue"]]
+     ,[Plain [Str "green"]]
+     ,[Plain [Str "red"]]]
+    ,Para [Image ("",[],[]) [Str "data61"] ("http://i.imgur.com/0h9dFhl.png","fig:")]
+    ,HorizontalRule
+    ,OrderedList (2,Decimal,Period)
+     [[Plain [Str "green"]]]]
+-}
+    
