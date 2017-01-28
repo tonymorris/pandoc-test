@@ -4,6 +4,7 @@ module Pandoc.Test where
   
 import Control.Lens
 import qualified Data.ByteString.Lazy as BSL
+import Data.List
 import Data.Map(Map)
 import qualified Data.Map as Map
 import System.FilePath
@@ -66,13 +67,34 @@ blockstest ::
   (AsPara t, AsOrderedList t, AsHorizontalRule t) =>
   [t]
 blockstest =
+  let sstr x = intersperse (_Space # ()) . map (_Str #) . words $ x
+      hr = _HorizontalRule # ()
+      ol x = _OrderedList # ((1,_Decimal # (),_Period # ()), x)
+  in  [
+        _Para # sstr "What is the colour of the sky"
+      , ol
+          [
+            [_Plain # [_Str # "blue"]]
+          , [_Plain # [_Str # "green"]]
+          , [_Plain # [_Str # "red"]]
+          ]
+      , _Para # [_Image # (nullAttr, sstr "data61", ("http://i.imgur.com/0h9dFhl.png","fig:"))]
+      , hr
+      , ol [[_Plain # sstr "green"]]
+      ]
+
+blockstestx ::
+  (AsPara t, AsOrderedList t, AsHorizontalRule t) =>
+  [t]
+blockstestx =
   [
     _Para # [_Str # "What",_Space # (),_Str # "is",_Space # (),_Str # "the",_Space # (),_Str # "colour",_Space # (),_Str # "of",_Space # (),_Str # "the",_Space # (),_Str # "sky?"]
-  , _OrderedList # ((1,_Decimal # (),_Period # ()),
-     [[_Plain # [_Str # "blue"]]
+  , _OrderedList # ((1,_Decimal # (),_Period # ())
+  , [[_Plain # [_Str # "blue"]]
   , [_Plain # [_Str # "green"]]
   , [_Plain # [_Str # "red"]]])
   , _Para # [_Image # (("",[],[]), [_Str #  "data61"], ("http://i.imgur.com/0h9dFhl.png","fig:"))]
   , _HorizontalRule # ()
   , _OrderedList # ((2,_Decimal # (),_Period # ()), [[_Plain # [_Str # "green"]]])
   ]
+  
