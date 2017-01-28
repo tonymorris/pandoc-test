@@ -2,19 +2,16 @@ name:               pandoc-test
 version:            0.0.1
 license:            BSD3
 license-file:       LICENSE
-author:             Tony Morris <ʇǝu˙sıɹɹoɯʇ@ןןǝʞsɐɥ>
+author:             Tony Morris <ʇǝu˙sıɹɹoɯʇ@ןןǝʞsɐɥ>, Joshua Morris <ɯoɔ˙lᴉɐɯƃ@llǝʞsɐɥ+sᴉɹɹoɯuɥoɾɐnɥsoɾ>
 maintainer:         Tony Morris
 copyright:          Copyright (c) 2017 Tony Morris
-synopsis:           Testing Pandoc
-category:           Testing
-description:        Testing Pandoc
-
+synopsis:           pandoc test
+category:           Test
+description:        pandoc test
 homepage:           https://github.com/tonymorris/pandoc-test
 bug-reports:        https://github.com/tonymorris/pandoc-test/issues
 cabal-version:      >= 1.10
 build-type:         Custom
-extra-source-files: changelog
-
 source-repository   head
   type:             git
   location:         git@github.com:tonymorris/pandoc-test.git
@@ -27,10 +24,14 @@ library
                     Haskell2010
 
   build-depends:
-                    base >= 4.8 && < 5
-                    , pandoc
-                    , data-default
+                    base < 5 && >= 4.8
+                    , pandoc == 1.19.2
+                    , pandoc-types == 1.18
+                    , texmath == 0.10
+                    , lens
                     , containers
+                    , filepath
+                    , bytestring
                     
   ghc-options:
                     -Wall
@@ -43,8 +44,7 @@ library
                     src
 
   exposed-modules:
-                    PandocTest
-                    PandocTest2
+                    Pandoc.Test
                     
 test-suite doctests
   type:
