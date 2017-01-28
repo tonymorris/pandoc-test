@@ -3,13 +3,16 @@
 module Pandoc.Test where
   
 import Control.Lens
+import qualified Data.ByteString.Lazy.Char8 as BSLC8
 import qualified Data.ByteString.Lazy as BSL
 import Data.List
 import Data.Map(Map)
 import qualified Data.Map as Map
 import System.FilePath
+import System.IO
 import Text.Pandoc.Definition
 import Text.Pandoc
+import Text.Pandoc.PDF 
 
 import Prelude
 
@@ -43,6 +46,8 @@ main =
         , writeFile (outdir </> "file.texinfo") (writeTexinfo options pandoc)
         , writeFile (outdir </> "file.textile") (writeTextile options pandoc)
         , writeFile (outdir </> "file.zimwiki") (writeZimWiki options pandoc)
+        -- todo
+        , makePDF "pdflatex" writeLaTeX options pandoc >>= either (hPutStrLn stderr . BSLC8.unpack) (BSL.writeFile (outdir </> "file.pdf"))
         ]
 
 pandoc ::
@@ -67,7 +72,7 @@ blockstest ::
   (AsPara t, AsOrderedList t, AsHorizontalRule t) =>
   [t]
 blockstest =
-  let sstr x = intersperse (_Space # ()) . map (_Str #) . words $ x
+  let sstr = intersperse (_Space # ()) . map (_Str #) . words
       hr = _HorizontalRule # ()
       ol x = _OrderedList # ((1,_Decimal # (),_Period # ()), x)
   in  [
